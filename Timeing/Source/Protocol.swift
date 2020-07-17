@@ -10,8 +10,9 @@ import Foundation
 public protocol EventTimingProtocol {
     associatedtype Input
     init(timeInterval: TimeInterval,
+         isEnable: Bool,
          action: ((Input?) -> Void)?)
-    func receive(_ input:Input)
+    func receive(_ input:Input?)
     var timeInterval: TimeInterval {get set}
     var isEnable:Bool {get set}
 }

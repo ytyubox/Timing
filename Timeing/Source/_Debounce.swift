@@ -7,7 +7,22 @@
 //
 
 import Foundation
-public class Debouncer<Input>:EventTimingProtocol {
+
+public class Debounce<Input>:EventTimingProtocol {
+    required public init(
+        timeInterval: TimeInterval,
+        isEnable: Bool = true,
+        action: ((Input?) -> Void)? = nil) {
+        self.receiver = TimingReceiver(action: action)
+        self.debounce = _Debounce(
+            timeInterval: timeInterval,
+            receiver: receiver,
+            isEnable: isEnable)
+    }
+    
+    internal var debounce: _Debounce<Input>
+    internal var receiver: TimingReceiver<Input>
+    
     public var isEnable: Bool {
         get { debounce.isEnable }
         set { debounce.isEnable = newValue }
@@ -18,64 +33,55 @@ public class Debouncer<Input>:EventTimingProtocol {
         set {debounce.timeInterval = newValue}
     }
     
-    public func receive(_ input: Input) {
+    public func receive(_ input: Input?) {
         debounce.receive(input)
     }
-    
-    required public init(
-        timeInterval: TimeInterval,
-        action: ((Input?) -> Void)? = nil) {
-        self.receiver = TimingReceiver(action: action)
-        self.debounce = _Debounce(timeInterval: timeInterval, receiver: receiver)
-    }
-    
-    internal var debounce: _Debounce<Input>
-    internal var receiver: TimingReceiver<Input>
-    
 }
 
 class _Debounce<Input>: EventTimingProtocol {
-    required convenience init(timeInterval: TimeInterval, action: ((Input?) -> Void)?) {
-        let receiver =  TimingReceiver<Input>(action: action)
-        self.init(timeInterval: timeInterval, receiver: receiver)
-
-    }
-    
-    
-    weak var receiver: TimingReceiver<Input>?
-    
-    init(
-        timeInterval: TimeInterval,
-        receiver: TimingReceiver<Input>) {
+    init(timeInterval: TimeInterval,
+         receiver: TimingReceiver<Input>,
+         isEnable:Bool) {
         self.timeInterval = timeInterval
         self.receiver = receiver
+        self.isEnable = isEnable
+    }
+    required convenience init(
+        timeInterval: TimeInterval,
+        isEnable: Bool,
+        action: ((Input?) -> Void)?
+    ) {
+        let receiver =  TimingReceiver<Input>(action: action)
+        self.init(timeInterval: timeInterval, receiver: receiver,isEnable: isEnable)
+        
     }
     
+    var isEnable = true { didSet { didSetIsEnable() } }
     var timeInterval: TimeInterval
     var timer:Timer?
-    var isEnable = true {
-        didSet {
-            if isEnable { return }
-            timer?.invalidate()
-            receiver?.received(value: value)
-        }
-    }
     var value: Input?
-    func receive(_ input: Input) {
+    weak var receiver: TimingReceiver<Input>?
+    
+    func receive(_ input: Input?) {
         timer?.invalidate()
         value = input
         guard isEnable else {
-            return block(value)
+            return block()
         }
         timer = Timer.scheduledTimer(
             withTimeInterval: timeInterval,
-            repeats: false,
-            block: { (timer) in
-                self.block(self.value)
-        })
+            repeats: false) {
+                (timer) in
+                self.block()
+        }
     }
-    private func block(_ input: Input?) {
-        self.receiver?.received(value: input)
+    private func didSetIsEnable() {
+        if isEnable { return }
+        timer?.invalidate()
+        receiver?.received(value: value)
+    }
+    private func block() {
+        self.receiver?.received(value: value)
         self.timer = nil
     }
 }

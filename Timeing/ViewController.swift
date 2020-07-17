@@ -9,30 +9,25 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBOutlet weak var debounceLabel: UILabel!
-    lazy var debouncer = Debouncer<String>(timeInterval: 0.5)
-        {
+    
+    
+    lazy var debouncer = Debounce<String>(timeInterval: 0.5)
+    {
         self.debounceLabel.text = $0
         self.debounceLabel.sizeToFit()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-    }
-    lazy var throttler = Throttler<String>(timeInterval: 1) { (text) in
-        self.throttleLabel.text = text
-        self.throttleLabel.sizeToFit()
-    }
+    @IBOutlet weak var debounceLabel: UILabel!
     @IBAction func didInputDebounce(_ sender: UITextField) {
         debouncer.receive(sender.text!)
     }
     @IBAction func didToggleDebounce(_ sender: UISwitch) {
         debouncer.isEnable = sender.isOn
     }
-    
+    // MARK: - Throttle
+    lazy var throttler = Throttle<String>(timeInterval: 1) { (text) in
+        self.throttleLabel.text = text
+        self.throttleLabel.sizeToFit()
+    }
     @IBOutlet weak var throttleLabel: UILabel!
     @IBAction func didInputThrottle(_ sender: UITextField) {
         throttler.receive(sender.text!)

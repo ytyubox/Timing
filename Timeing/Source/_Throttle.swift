@@ -8,7 +8,21 @@
 
 import Foundation
 
-public class Throttler<Input>:EventTimingProtocol {
+public class Throttle<Input>:EventTimingProtocol {
+    required public init(
+        timeInterval: TimeInterval,
+        isEnable: Bool = false,
+        action: ((Input?) -> Void)? = nil) {
+        receiver =  TimingReceiver(action: action)
+        throttle = _Throttle(
+            timeInterval: timeInterval,
+            receiver:  receiver,
+            isEnable: isEnable)
+    }
+    
+    internal var throttle: _Throttle<Input>
+    internal var receiver: TimingReceiver<Input>
+    
     public var isEnable: Bool {
         get {throttle.isEnable}
         set {throttle.isEnable = newValue}
@@ -18,66 +32,62 @@ public class Throttler<Input>:EventTimingProtocol {
         get {throttle.timeInterval}
         set {throttle.timeInterval = newValue}
     }
-    required public init(
-    timeInterval: TimeInterval,
-    action: ((Input?) -> Void)? = nil) {
-        receiver =  TimingReceiver(action: action)
-        throttle = _Throttle(
-            timeInterval: timeInterval,
-            receiver:  receiver)
-    }
     
-    
-    public func receive(_ input: Input) {
+    public func receive(_ input: Input?) {
         throttle.receive(input)
     }
-    
-    internal var throttle: _Throttle<Input>
-    internal var receiver: TimingReceiver<Input>
 }
 
 class _Throttle<Input>:EventTimingProtocol {
-    required convenience init(timeInterval: TimeInterval, action: ((Input?) -> Void)?) {
-        let receiver =  TimingReceiver<Input>(action: action)
-        self.init(timeInterval: timeInterval, receiver: receiver)
-    }
-    
-    var isEnable: Bool = true {
-        didSet {
-            switch isEnable {
-                case true:
-                    timer = makeTimer()
-                case false:
-                    deactivate()
-            }
-        }
-    }
-    
-    func deactivate() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
-    init(timeInterval: TimeInterval, receiver: TimingReceiver<Input>? = nil) {
+    init(timeInterval: TimeInterval,
+         receiver: TimingReceiver<Input>? = nil,
+         isEnable:Bool) {
         self.timeInterval = timeInterval
         self.receiver = receiver
-        timer = makeTimer()
+        self.isEnable = isEnable
+        makeTimer()
     }
-    func makeTimer() -> Timer {
-        Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { (timer) in
-            guard let value = self.value else {return}
-            self.receiver?.received(value: value)
-        }
+    required convenience init(
+        timeInterval: TimeInterval,
+        isEnable:Bool,
+        action: ((Input?) -> Void)?) {
+        let receiver =  TimingReceiver<Input>(action: action)
+        self.init(timeInterval: timeInterval,
+                  receiver: receiver,
+                  isEnable: isEnable)
     }
-    var timer:Timer?
+    
+    var isEnable: Bool { didSet { didSetIsEnable() } }
+    var timer:Timer? {didSet {oldValue?.invalidate()}}
     var timeInterval: TimeInterval
     var value: Input?
-    func receive(_ input: Input) {
+    weak var receiver: TimingReceiver<Input>?
+    
+    func receive(_ input: Input?) {
         self.value = input
         if isEnable {return}
         receiver?.received(value: input)
     }
     
-    weak var receiver: TimingReceiver<Input>?
+    private func didSetIsEnable() {
+        makeTimer()
+    }
+    
+    private func deactivate() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    private func makeTimer() {
+       timer = (isEnable)
+        ? Timer.scheduledTimer(withTimeInterval: timeInterval,
+                               repeats: true,
+                               block: timerDidHit)
+        : nil
+    }
+    
+    private func timerDidHit(timer: Timer) {
+        self.receiver?.received(value: self.value)
+    }
 }
 
