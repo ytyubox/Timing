@@ -1,6 +1,12 @@
 #  Timing
 
  Rx Debounce & Throttle without Rx
+ 
+![](https://i.imgur.com/vqM9i5u.png)
+from reactivex.io
+
+![](https://i.imgur.com/tWuqJCk.png)
+from rxjs.dev
 
 ## Setting up
 
