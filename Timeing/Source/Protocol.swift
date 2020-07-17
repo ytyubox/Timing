@@ -7,14 +7,15 @@
 //
 
 import Foundation
-protocol EventCutterProtocol {
+public protocol EventTimingProtocol {
     associatedtype Input
-    var timeInterval: TimeInterval {get set}
-//    var receiver: DebounceReceiver<Input>? {get}
+    init(timeInterval: TimeInterval,
+         action: ((Input?) -> Void)?)
     func receive(_ input:Input)
+    var timeInterval: TimeInterval {get set}
     var isEnable:Bool {get set}
 }
-protocol DebounceReceiverProtocol:AnyObject {
+public protocol TimingReceiverProtocol:AnyObject {
     associatedtype Output
-    func received(value: Output)
+    func received(value: Output?)
 }

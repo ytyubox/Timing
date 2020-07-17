@@ -7,16 +7,13 @@
 //
 
 import Foundation
-
-
-
-class TimeReceiver<Output>: DebounceReceiverProtocol {
-    internal init(action: ((Output) -> Void)? = nil) {
+public class TimingReceiver<Output>: TimingReceiverProtocol {
+    public init(action: ((Output?) -> Void)? = nil) {
         self.action = action
     }
     
-    func received(value: Output) {
+    public func received(value: Output?) {
         action?(value)
     }
-    var action:((Output) -> Void)?
+    public var action:((Output?) -> Void)?
 }

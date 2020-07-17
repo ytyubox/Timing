@@ -8,35 +8,40 @@
 
 import Foundation
 
-class Throttler<Input>:EventCutterProtocol {
-    var isEnable: Bool {
+public class Throttler<Input>:EventTimingProtocol {
+    public var isEnable: Bool {
         get {throttle.isEnable}
         set {throttle.isEnable = newValue}
     }
     
-    var timeInterval: TimeInterval {
+    public var timeInterval: TimeInterval {
         get {throttle.timeInterval}
         set {throttle.timeInterval = newValue}
     }
-    internal init(
+    required public init(
     timeInterval: TimeInterval,
-    action: ((Input) -> Void)? = nil) {
-        receiver =  TimeReceiver(action: action)
-        throttle = Throttle(
+    action: ((Input?) -> Void)? = nil) {
+        receiver =  TimingReceiver(action: action)
+        throttle = _Throttle(
             timeInterval: timeInterval,
             receiver:  receiver)
     }
     
     
-    func receive(_ input: Input) {
+    public func receive(_ input: Input) {
         throttle.receive(input)
     }
     
-    var throttle: Throttle<Input>
-    var receiver: TimeReceiver<Input>
+    internal var throttle: _Throttle<Input>
+    internal var receiver: TimingReceiver<Input>
 }
 
-class Throttle<Input>:EventCutterProtocol {
+class _Throttle<Input>:EventTimingProtocol {
+    required convenience init(timeInterval: TimeInterval, action: ((Input?) -> Void)?) {
+        let receiver =  TimingReceiver<Input>(action: action)
+        self.init(timeInterval: timeInterval, receiver: receiver)
+    }
+    
     var isEnable: Bool = true {
         didSet {
             switch isEnable {
@@ -53,7 +58,7 @@ class Throttle<Input>:EventCutterProtocol {
         timer = nil
     }
     
-    internal init(timeInterval: TimeInterval, receiver: TimeReceiver<Input>? = nil) {
+    init(timeInterval: TimeInterval, receiver: TimingReceiver<Input>? = nil) {
         self.timeInterval = timeInterval
         self.receiver = receiver
         timer = makeTimer()
@@ -73,6 +78,6 @@ class Throttle<Input>:EventCutterProtocol {
         receiver?.received(value: input)
     }
     
-    weak var receiver: TimeReceiver<Input>?
+    weak var receiver: TimingReceiver<Input>?
 }
 
