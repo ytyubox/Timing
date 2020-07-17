@@ -35,8 +35,8 @@ class Debouncer<Input>:EventCutterProtocol {
     
     internal init(
         timeInterval: TimeInterval,
-        completion: ((Input) -> Void)? = nil) {
-        self.receiver = TimeReceiver(completion: completion)
+        action: ((Input) -> Void)? = nil) {
+        self.receiver = TimeReceiver(action: action)
         self.debounce = Debounce(debounceTime: timeInterval, receiver: receiver)
     }
     
@@ -77,12 +77,12 @@ class Debounce<Input>: EventCutterProtocol {
 }
 
 class TimeReceiver<Output>: DebounceReceiverProtocol {
-    internal init(completion: ((Output) -> Void)? = nil) {
-        self.completion = completion
+    internal init(action: ((Output) -> Void)? = nil) {
+        self.action = action
     }
     
     func received(value: Output) {
-        completion?(value)
+        action?(value)
     }
-    var completion:((Output) -> Void)?
+    var action:((Output) -> Void)?
 }

@@ -19,8 +19,8 @@ class Throttler<Input>:EventCutterProtocol {
     }
     internal init(
     timeInterval: TimeInterval,
-    completion: ((Input) -> Void)? = nil) {
-        receiver =  TimeReceiver(completion: completion)
+    action: ((Input) -> Void)? = nil) {
+        receiver =  TimeReceiver(action: action)
         throttle = Throttle(
             timeInterval: timeInterval,
             receiver:  receiver)
