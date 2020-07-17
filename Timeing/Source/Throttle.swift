@@ -9,8 +9,9 @@
 import Foundation
 
 class Throttler<Input>:EventCutterProtocol {
-    func inactive() {
-        throttle.inactive()
+    var isEnable: Bool {
+        get {throttle.isEnable}
+        set {throttle.isEnable = newValue}
     }
     
     var timeInterval: TimeInterval {
@@ -36,8 +37,20 @@ class Throttler<Input>:EventCutterProtocol {
 }
 
 class Throttle<Input>:EventCutterProtocol {
-    func inactive() {
+    var isEnable: Bool = true {
+        didSet {
+            switch isEnable {
+                case true:
+                    timer = makeTimer()
+                case false:
+                    deactivate()
+            }
+        }
+    }
+    
+    func deactivate() {
         timer?.invalidate()
+        timer = nil
     }
     
     internal init(timeInterval: TimeInterval, receiver: TimeReceiver<Input>? = nil) {
@@ -56,6 +69,8 @@ class Throttle<Input>:EventCutterProtocol {
     var value: Input?
     func receive(_ input: Input) {
         self.value = input
+        if isEnable {return}
+        receiver?.received(value: input)
     }
     
     weak var receiver: TimeReceiver<Input>?

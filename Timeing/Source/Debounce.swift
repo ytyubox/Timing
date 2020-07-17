@@ -7,21 +7,15 @@
 //
 
 import Foundation
-protocol EventCutterProtocol {
-    associatedtype Input
-    var timeInterval: TimeInterval {get set}
-//    var receiver: DebounceReceiver<Input>? {get}
-    func receive(_ input:Input)
-    func inactive()
-}
-protocol DebounceReceiverProtocol:AnyObject {
-    associatedtype Output
-    func received(value: Output)
-}
 
 class Debouncer<Input>:EventCutterProtocol {
-    func inactive() {
-        debounce.inactive()
+    var isEnable: Bool {
+        get {
+            debounce.isEnable
+        }
+        set {
+            debounce.isEnable = newValue
+        }
     }
     
     var timeInterval: TimeInterval {
@@ -46,7 +40,8 @@ class Debouncer<Input>:EventCutterProtocol {
 }
 
 class Debounce<Input>: EventCutterProtocol {
-    func inactive() {
+    
+    func deactivate() {
         timer?.invalidate()
         timer = nil
     }
@@ -63,26 +58,22 @@ class Debounce<Input>: EventCutterProtocol {
     
     var timeInterval: TimeInterval
     var timer:Timer?
+    var isEnable = true
     
     func receive(_ input: Input) {
         timer?.invalidate()
+        guard isEnable else {
+            return block(input)
+        }
         timer = Timer.scheduledTimer(
             withTimeInterval: timeInterval,
             repeats: false,
             block: { (timer) in
-                self.receiver?.received(value: input)
-                self.timer = nil
+                self.block(input)
         })
     }
-}
-
-class TimeReceiver<Output>: DebounceReceiverProtocol {
-    internal init(action: ((Output) -> Void)? = nil) {
-        self.action = action
+    private func block(_ input: Input) {
+        self.receiver?.received(value: input)
+        self.timer = nil
     }
-    
-    func received(value: Output) {
-        action?(value)
-    }
-    var action:((Output) -> Void)?
 }

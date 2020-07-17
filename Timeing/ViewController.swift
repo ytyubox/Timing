@@ -29,9 +29,15 @@ class ViewController: UIViewController {
     @IBAction func didInputDebounce(_ sender: UITextField) {
         debouncer.receive(sender.text!)
     }
+    @IBAction func didToggleDebounce(_ sender: UISwitch) {
+        debouncer.isEnable = sender.isOn
+    }
     
     @IBOutlet weak var throttleLabel: UILabel!
     @IBAction func didInputThrottle(_ sender: UITextField) {
         throttler.receive(sender.text!)
+    }
+    @IBAction func didToggleThrottle(_ sender: UISwitch) {
+        throttler.isEnable = sender.isOn
     }
 }

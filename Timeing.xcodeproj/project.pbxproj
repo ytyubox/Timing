@@ -15,6 +15,8 @@
 		A72F832224C1921B00A7E99E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A72F832024C1921B00A7E99E /* LaunchScreen.storyboard */; };
 		A72F832A24C1922F00A7E99E /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F832924C1922F00A7E99E /* Debounce.swift */; };
 		A72F832C24C19B1500A7E99E /* Throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F832B24C19B1500A7E99E /* Throttle.swift */; };
+		A72F832F24C1A18200A7E99E /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F832E24C1A18200A7E99E /* Protocol.swift */; };
+		A72F833124C1A1A200A7E99E /* TimeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F833024C1A1A200A7E99E /* TimeReceiver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		A72F832324C1921B00A7E99E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A72F832924C1922F00A7E99E /* Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
 		A72F832B24C19B1500A7E99E /* Throttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttle.swift; sourceTree = "<group>"; };
+		A72F832E24C1A18200A7E99E /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		A72F833024C1A1A200A7E99E /* TimeReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeReceiver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,14 +67,24 @@
 				A72F831524C1921900A7E99E /* AppDelegate.swift */,
 				A72F831724C1921900A7E99E /* SceneDelegate.swift */,
 				A72F831924C1921900A7E99E /* ViewController.swift */,
-				A72F832924C1922F00A7E99E /* Debounce.swift */,
-				A72F832B24C19B1500A7E99E /* Throttle.swift */,
+				A72F832D24C1A17100A7E99E /* Source */,
 				A72F831B24C1921900A7E99E /* Main.storyboard */,
 				A72F831E24C1921B00A7E99E /* Assets.xcassets */,
 				A72F832024C1921B00A7E99E /* LaunchScreen.storyboard */,
 				A72F832324C1921B00A7E99E /* Info.plist */,
 			);
 			path = Timeing;
+			sourceTree = "<group>";
+		};
+		A72F832D24C1A17100A7E99E /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				A72F832924C1922F00A7E99E /* Debounce.swift */,
+				A72F832B24C19B1500A7E99E /* Throttle.swift */,
+				A72F832E24C1A18200A7E99E /* Protocol.swift */,
+				A72F833024C1A1A200A7E99E /* TimeReceiver.swift */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,8 +161,10 @@
 				A72F831A24C1921900A7E99E /* ViewController.swift in Sources */,
 				A72F831624C1921900A7E99E /* AppDelegate.swift in Sources */,
 				A72F832A24C1922F00A7E99E /* Debounce.swift in Sources */,
+				A72F833124C1A1A200A7E99E /* TimeReceiver.swift in Sources */,
 				A72F832C24C19B1500A7E99E /* Throttle.swift in Sources */,
 				A72F831824C1921900A7E99E /* SceneDelegate.swift in Sources */,
+				A72F832F24C1A18200A7E99E /* Protocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
