@@ -58,8 +58,8 @@ class _Throttle<Input>:EventTimingProtocol {
     }
     
     var isEnable: Bool { didSet { didSetIsEnable() } }
-    var timer:Timer? {didSet {oldValue?.invalidate()}}
-    var timeInterval: TimeInterval
+    var timer:Timer? { didSet {oldValue?.invalidate()} }
+    var timeInterval: TimeInterval { didSet{makeTimer() } }
     var value: Input?
     weak var receiver: TimingReceiver<Input>?
     

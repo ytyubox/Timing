@@ -20,7 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A72F831224C1921900A7E99E /* Timeing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timeing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A72F831224C1921900A7E99E /* Timing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72F831524C1921900A7E99E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A72F831724C1921900A7E99E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A72F831924C1921900A7E99E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,7 +56,7 @@
 		A72F831324C1921900A7E99E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A72F831224C1921900A7E99E /* Timeing.app */,
+				A72F831224C1921900A7E99E /* Timing.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,9 +90,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A72F831124C1921900A7E99E /* Timeing */ = {
+		A72F831124C1921900A7E99E /* Timing */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A72F832624C1921B00A7E99E /* Build configuration list for PBXNativeTarget "Timeing" */;
+			buildConfigurationList = A72F832624C1921B00A7E99E /* Build configuration list for PBXNativeTarget "Timing" */;
 			buildPhases = (
 				A72F830E24C1921900A7E99E /* Sources */,
 				A72F830F24C1921900A7E99E /* Frameworks */,
@@ -102,9 +102,9 @@
 			);
 			dependencies = (
 			);
-			name = Timeing;
+			name = Timing;
 			productName = Timeing;
-			productReference = A72F831224C1921900A7E99E /* Timeing.app */;
+			productReference = A72F831224C1921900A7E99E /* Timing.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -122,7 +122,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A72F830D24C1921900A7E99E /* Build configuration list for PBXProject "Timeing" */;
+			buildConfigurationList = A72F830D24C1921900A7E99E /* Build configuration list for PBXProject "Timing" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -135,7 +135,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A72F831124C1921900A7E99E /* Timeing */,
+				A72F831124C1921900A7E99E /* Timing */,
 			);
 		};
 /* End PBXProject section */
@@ -315,7 +315,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ytyubox.Timeing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ytyubox.Timing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -333,7 +333,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ytyubox.Timeing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ytyubox.Timing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -343,7 +343,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A72F830D24C1921900A7E99E /* Build configuration list for PBXProject "Timeing" */ = {
+		A72F830D24C1921900A7E99E /* Build configuration list for PBXProject "Timing" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A72F832424C1921B00A7E99E /* Debug */,
@@ -352,7 +352,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A72F832624C1921B00A7E99E /* Build configuration list for PBXNativeTarget "Timeing" */ = {
+		A72F832624C1921B00A7E99E /* Build configuration list for PBXNativeTarget "Timing" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A72F832724C1921B00A7E99E /* Debug */,

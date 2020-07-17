@@ -23,6 +23,11 @@ class ViewController: UIViewController {
     @IBAction func didToggleDebounce(_ sender: UISwitch) {
         debouncer.isEnable = sender.isOn
     }
+    @IBOutlet weak var debounceStepperLabel: UILabel!
+    @IBAction func didChangeDebounceStepper(_ sender: UIStepper) {
+        debounceStepperLabel.text = sender.value.description
+        debouncer.timeInterval = sender.value
+    }
     // MARK: - Throttle
     lazy var throttler = Throttle<String>(timeInterval: 1) { (text) in
         self.throttleLabel.text = text
@@ -34,5 +39,10 @@ class ViewController: UIViewController {
     }
     @IBAction func didToggleThrottle(_ sender: UISwitch) {
         throttler.isEnable = sender.isOn
+    }
+    @IBOutlet weak var throttleStepperLabel: UILabel!
+    @IBAction func didChangeThrottleStepper(_ sender: UIStepper) {
+        throttleStepperLabel.text = sender.value.description
+        throttler.timeInterval = sender.value
     }
 }
