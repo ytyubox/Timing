@@ -29,5 +29,5 @@ throttler.receive(text)
 ```
 
 
-‘![](demo.png)
+![](demo.png)
 

@@ -53,7 +53,7 @@
 			children = (
 				A72F833424C1B0E400A7E99E /* README.md */,
 				A72F833224C1B0D800A7E99E /* demo.png */,
-				A72F831424C1921900A7E99E /* Timeing */,
+				A72F831424C1921900A7E99E /* Timing */,
 				A72F831324C1921900A7E99E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,7 +66,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A72F831424C1921900A7E99E /* Timeing */ = {
+		A72F831424C1921900A7E99E /* Timing */ = {
 			isa = PBXGroup;
 			children = (
 				A72F831524C1921900A7E99E /* AppDelegate.swift */,
@@ -78,7 +78,7 @@
 				A72F832024C1921B00A7E99E /* LaunchScreen.storyboard */,
 				A72F832324C1921B00A7E99E /* Info.plist */,
 			);
-			path = Timeing;
+			path = Timing;
 			sourceTree = "<group>";
 		};
 		A72F832D24C1A17100A7E99E /* Source */ = {
