@@ -17,6 +17,7 @@
 		A72F832C24C19B1500A7E99E /* _Throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F832B24C19B1500A7E99E /* _Throttle.swift */; };
 		A72F832F24C1A18200A7E99E /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F832E24C1A18200A7E99E /* Protocol.swift */; };
 		A72F833124C1A1A200A7E99E /* TimingReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F833024C1A1A200A7E99E /* TimingReceiver.swift */; };
+		A72F833324C1B0D900A7E99E /* demo.png in Resources */ = {isa = PBXBuildFile; fileRef = A72F833224C1B0D800A7E99E /* demo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		A72F832B24C19B1500A7E99E /* _Throttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Throttle.swift; sourceTree = "<group>"; };
 		A72F832E24C1A18200A7E99E /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		A72F833024C1A1A200A7E99E /* TimingReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingReceiver.swift; sourceTree = "<group>"; };
+		A72F833224C1B0D800A7E99E /* demo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = demo.png; sourceTree = "<group>"; };
+		A72F833424C1B0E400A7E99E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +51,8 @@
 		A72F830924C1921900A7E99E = {
 			isa = PBXGroup;
 			children = (
+				A72F833424C1B0E400A7E99E /* README.md */,
+				A72F833224C1B0D800A7E99E /* demo.png */,
 				A72F831424C1921900A7E99E /* Timeing */,
 				A72F831324C1921900A7E99E /* Products */,
 			);
@@ -148,6 +153,7 @@
 				A72F832224C1921B00A7E99E /* LaunchScreen.storyboard in Resources */,
 				A72F831F24C1921B00A7E99E /* Assets.xcassets in Resources */,
 				A72F831D24C1921900A7E99E /* Main.storyboard in Resources */,
+				A72F833324C1B0D900A7E99E /* demo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

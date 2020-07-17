@@ -29,7 +29,9 @@ class ViewController: UIViewController {
         debouncer.timeInterval = sender.value
     }
     // MARK: - Throttle
-    lazy var throttler = Throttle<String>(timeInterval: 1) { (text) in
+    lazy var throttler = Throttle<String>(timeInterval: 1,
+                                          isEnable: false) {
+        (text) in
         self.throttleLabel.text = text
         self.throttleLabel.sizeToFit()
     }
