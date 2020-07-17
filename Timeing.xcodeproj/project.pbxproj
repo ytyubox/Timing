@@ -14,6 +14,7 @@
 		A72F831F24C1921B00A7E99E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A72F831E24C1921B00A7E99E /* Assets.xcassets */; };
 		A72F832224C1921B00A7E99E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A72F832024C1921B00A7E99E /* LaunchScreen.storyboard */; };
 		A72F832A24C1922F00A7E99E /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F832924C1922F00A7E99E /* Debounce.swift */; };
+		A72F832C24C19B1500A7E99E /* Throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F832B24C19B1500A7E99E /* Throttle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		A72F832124C1921B00A7E99E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A72F832324C1921B00A7E99E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A72F832924C1922F00A7E99E /* Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
+		A72F832B24C19B1500A7E99E /* Throttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				A72F831724C1921900A7E99E /* SceneDelegate.swift */,
 				A72F831924C1921900A7E99E /* ViewController.swift */,
 				A72F832924C1922F00A7E99E /* Debounce.swift */,
+				A72F832B24C19B1500A7E99E /* Throttle.swift */,
 				A72F831B24C1921900A7E99E /* Main.storyboard */,
 				A72F831E24C1921B00A7E99E /* Assets.xcassets */,
 				A72F832024C1921B00A7E99E /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 				A72F831A24C1921900A7E99E /* ViewController.swift in Sources */,
 				A72F831624C1921900A7E99E /* AppDelegate.swift in Sources */,
 				A72F832A24C1922F00A7E99E /* Debounce.swift in Sources */,
+				A72F832C24C19B1500A7E99E /* Throttle.swift in Sources */,
 				A72F831824C1921900A7E99E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

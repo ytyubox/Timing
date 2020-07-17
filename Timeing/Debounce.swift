@@ -7,18 +7,28 @@
 //
 
 import Foundation
-protocol DebounceProtocol {
+protocol EventCutterProtocol {
     associatedtype Input
-//    var debounceTime: TimeInterval {get set}
+    var timeInterval: TimeInterval {get set}
 //    var receiver: DebounceReceiver<Input>? {get}
     func receive(_ input:Input)
+    func inactive()
 }
 protocol DebounceReceiverProtocol:AnyObject {
     associatedtype Output
     func received(value: Output)
 }
 
-class Debouncer<Input>:DebounceProtocol {
+class Debouncer<Input>:EventCutterProtocol {
+    func inactive() {
+        debounce.inactive()
+    }
+    
+    var timeInterval: TimeInterval {
+        get {debounce.timeInterval}
+        set {debounce.timeInterval = newValue}
+    }
+    
     func receive(_ input: Input) {
         debounce.receive(input)
     }
@@ -26,33 +36,38 @@ class Debouncer<Input>:DebounceProtocol {
     internal init(
         timeInterval: TimeInterval,
         completion: ((Input) -> Void)? = nil) {
-        self.receiver = DebounceReceiver(completion: completion)
+        self.receiver = TimeReceiver(completion: completion)
         self.debounce = Debounce(debounceTime: timeInterval, receiver: receiver)
     }
     
     private var debounce: Debounce<Input>
-    private var receiver: DebounceReceiver<Input>
+    private var receiver: TimeReceiver<Input>
     
 }
 
-class Debounce<Input>: DebounceProtocol {
-    weak var receiver: DebounceReceiver<Input>?
+class Debounce<Input>: EventCutterProtocol {
+    func inactive() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    weak var receiver: TimeReceiver<Input>?
     
     internal init(
         debounceTime: TimeInterval,
-        receiver: DebounceReceiver<Input>
+        receiver: TimeReceiver<Input>
                   ) {
-        self.debounceTime = debounceTime
+        self.timeInterval = debounceTime
         self.receiver = receiver
     }
     
-    var debounceTime: TimeInterval
+    var timeInterval: TimeInterval
     var timer:Timer?
     
     func receive(_ input: Input) {
         timer?.invalidate()
         timer = Timer.scheduledTimer(
-            withTimeInterval: debounceTime,
+            withTimeInterval: timeInterval,
             repeats: false,
             block: { (timer) in
                 self.receiver?.received(value: input)
@@ -61,7 +76,7 @@ class Debounce<Input>: DebounceProtocol {
     }
 }
 
-class DebounceReceiver<Output>: DebounceReceiverProtocol {
+class TimeReceiver<Output>: DebounceReceiverProtocol {
     internal init(completion: ((Output) -> Void)? = nil) {
         self.completion = completion
     }

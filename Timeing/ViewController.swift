@@ -22,9 +22,16 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
     }
-
+    lazy var throttler = Throttler<String>(timeInterval: 1) { (text) in
+        self.throttleLabel.text = text
+        self.throttleLabel.sizeToFit()
+    }
     @IBAction func didInputDebounce(_ sender: UITextField) {
         debouncer.receive(sender.text!)
     }
     
+    @IBOutlet weak var throttleLabel: UILabel!
+    @IBAction func didInputThrottle(_ sender: UITextField) {
+        throttler.receive(sender.text!)
+    }
 }
